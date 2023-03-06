@@ -2,20 +2,21 @@
 #include <stdlib.h>
 #include <time.h>
 
-void generate(int N){
+#define numof(ary) (sizeof ary / sizeof ary[0])
 
-    int index[N];
-    srand( time(NULL) );
-
+void generate(int *arr, int N) {
+    srand(time(NULL));  // initialize random seed
     
-    for(int i=1; i<=N; i++){
-        index[i] = rand();
-        printf("%d " , index[i]);
+    for (int i = 0; i < N; i++) {
+        arr[i] = rand() ;  // generate a random number
     }
 }
 
-void setpivot(int sorted[]){
-    
+void printArray(int *arr, int N) {
+    for (int i = 0; i < N; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
 }
 
 void swap(int *a, int *b){
@@ -24,31 +25,41 @@ void swap(int *a, int *b){
 	*b = temp;
 }
 
-void quicksort(int sorted[],int left, int right){
+void QuickSort(int sorted[],int left, int right){
     int leftptr = left;
     int rightptr = right;
     int pivot = sorted[(leftptr + rightptr)/2];
     
-
-    int i;
-    int j;
-
-    while (sorted[left]<= pivot)
-    {
-        leftptr++;
+    while(1){
+        while (sorted[leftptr]<= pivot)
+        {
+            leftptr++;
+        }
+        while(pivot <= sorted[rightptr]){
+            rightptr--;
+        }
+        if(leftptr >= rightptr) break;
+        swap(&sorted[leftptr],&sorted[rightptr]);
+        leftptr++; rightptr++;
     }
-    while(pivot <= sorted[right]){
-        right--;
-    }
-    if(left >= right) break;
     
+    //左のデータ群を対象としてクイックソートを再帰
+	if (left < leftptr - 1) QuickSort(sorted, left, leftptr - 1);
+
+	//右のデータ群を対象としてクイックソートを再帰
+	if (rightptr + 1 < right) QuickSort(sorted, rightptr + 1, right);
+
+
 }
 
 int main(int argc, char const *argv[])
 {
     int N = 100;
-    generate(N);
+    int arr[N];
 
+    generate(arr, N); //(Arreyname) is the pointer to Arreyname[0] so you can use Arrayname as a pointer
+    printArray(arr, N);
+    
 
     return 0;
 }
