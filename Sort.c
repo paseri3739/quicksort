@@ -54,11 +54,11 @@ int main(int argc, char const *argv[])
     int N = 100;
     int arr[N];
 
-    generate(arr, N);
+    generate(arr, N); //Arreyname is the pointer to Arreyname[0]
     printArray(arr, N);
     printf("\n");
 
-    QuickSort(arr,0,N-1);
+    QuickSort(arr,0,N-1); //You should pass N-1
     printArray(arr,N);
     return 0;
 }
