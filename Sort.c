@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define numof(ary) (sizeof ary / sizeof ary[0])
-
 void generate(int *arr, int N) {
     srand(time(NULL));  // initialize random seed
     
@@ -22,34 +20,33 @@ void printArray(int *arr, int N) {
 void swap(int *a, int *b){
     int temp = *a;
     *a = *b;
-	*b = temp;
+    *b = temp;
 }
 
 void QuickSort(int* sorted, int left, int right){
+
     int leftptr = left;
     int rightptr = right;
     int pivot = sorted[(leftptr + rightptr)/2];
     
     while(1){
-        while (sorted[leftptr]<= pivot)
+        while (sorted[leftptr] < pivot)
         {
             leftptr++;
         }
-        while(pivot <= sorted[rightptr]){
+        while(sorted[rightptr] > pivot){
             rightptr--;
         }
         if(leftptr >= rightptr) break;
-        swap(&sorted[leftptr],&sorted[rightptr]);
-        leftptr++; rightptr++;
+        swap(&sorted[leftptr], &sorted[rightptr]);
+        leftptr++; rightptr--;
     }
     
     //左のデータ群を対象としてクイックソートを再帰
-	if (left < leftptr - 1) QuickSort(sorted, left, leftptr - 1);
+    if (left < leftptr - 1) QuickSort(sorted, left, leftptr - 1);
 
-	//右のデータ群を対象としてクイックソートを再帰
-	if (rightptr + 1 < right) QuickSort(sorted, rightptr + 1, right);
-
-
+    //右のデータ群を対象としてクイックソートを再帰
+    if (rightptr + 1 < right) QuickSort(sorted, rightptr + 1, right);
 }
 
 int main(int argc, char const *argv[])
@@ -57,9 +54,11 @@ int main(int argc, char const *argv[])
     int N = 100;
     int arr[N];
 
-    generate(arr, N); //(Arrayname) is the pointer to Arrayname[0] so you can use Arrayname as a pointer
+    generate(arr, N);
     printArray(arr, N);
     printf("\n");
 
+    QuickSort(arr,0,N-1);
+    printArray(arr,N);
     return 0;
 }
