@@ -25,7 +25,7 @@ void swap(int *a, int *b){
 	*b = temp;
 }
 
-void QuickSort(int sorted[],int left, int right){
+void QuickSort(int* sorted, int left, int right){
     int leftptr = left;
     int rightptr = right;
     int pivot = sorted[(leftptr + rightptr)/2];
@@ -57,9 +57,9 @@ int main(int argc, char const *argv[])
     int N = 100;
     int arr[N];
 
-    generate(arr, N); //(Arreyname) is the pointer to Arreyname[0] so you can use Arrayname as a pointer
+    generate(arr, N); //(Arrayname) is the pointer to Arrayname[0] so you can use Arrayname as a pointer
     printArray(arr, N);
-    
+    printf("\n");
 
     return 0;
 }
