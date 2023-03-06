@@ -54,7 +54,7 @@ int main(int argc, char const *argv[])
     int N = 100;
     int arr[N];
 
-    generate(arr, N); //Arreyname is the pointer to Arreyname[0]
+    generate(arr, N); //Arrayname is the pointer to Arrayname[0]
     printArray(arr, N);
     printf("\n");
 
